@@ -21,7 +21,8 @@ DeepFake), ensuring privacy-focused predictions.
 
 - [Problem Statement](#problem-statement)
 - [Idea / Solution](#idea--solution)
-- [Dependencies / Limitations](#dependencies--limitations)
+- [Dependencies](#dependencies)
+- [Limitations](#limitations)
 - [Future Scope](#future-scope)
 - [Key Features](#key-features)
 - [Getting Started](#getting-started)
@@ -29,14 +30,12 @@ DeepFake), ensuring privacy-focused predictions.
     - [Setup before 1st Run](#setup-before-1st-run)
     - [Setup before Every Run](#setup-before-every-run)
     - [Run the Application](#run-the-application)
-        - [Windows](#windows)
-        - [macOS / Linux](#macos--linux)
 - [How to use](#how-to-use)
 - [Built With](#built-with)
 - [Authors](#authors)
 
 ## Problem Statement
-Could a feeling hide inside a visual pattern, waiting for someone to understand it ?
+**Theme-w5:** Could a feeling hide inside a visual pattern, waiting for someone to understand it ?
 
 
 ## Idea / Solution
@@ -66,10 +65,6 @@ If this problem remains unaddressed, misinformation, manipulation, and erosion o
 * **Experimental Torch Backend:** The Torch-based implementation is non-deterministic and uncalibrated, as it is intended only as a future research scaffold.
 * **Image-Only Support:** Video deepfake detection is not yet implemented due to added computational and temporal modeling complexity.
 * **Confidence Calibration:** Output probabilities are not fully calibrated and should be interpreted as indicative rather than definitive.
-
-### Impact and Future Work
-
-These limitations define the current scope rather than the viability of the system. Addressing them points toward future work in custom training, calibration, and video-based deepfake detection.
 
 ## Future Scope
 
@@ -153,7 +148,7 @@ python main.py
 ```bash
 python3 main.py
 ```
-
+> **Caution:** When running the application for first time , it may take a little time to download AI model.
 
 
 ## How to Use
