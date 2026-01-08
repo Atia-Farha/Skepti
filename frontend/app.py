@@ -9,9 +9,9 @@ from textual.widgets import TabbedContent, Button, Input, Tabs, DataTable
 from textual import work
 
 from frontend.ui.ui import MainUI
-from backend.imgdetect2 import detect_imagefake_torch
+from backend.imagedetect2 import detect_imagefake_torch
 
-# DB_PATH = (Path(__file__).resolve().parents[1] / "image_predictions.db")
+DB_PATH = (Path(__file__).resolve().parents[1] / "image_predictions.db")
 
 
 def _format_ts(ts: str) -> str:
