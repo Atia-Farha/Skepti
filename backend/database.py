@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connect to a database (or create it if it doesn't exist)
-conn = sqlite3.connect("image_predictions.db", check_same_thread=False)
+conn = sqlite3.connect("skepti.db", check_same_thread=False)
 cursor = conn.cursor()
 
 # Create a table for storing predictions
