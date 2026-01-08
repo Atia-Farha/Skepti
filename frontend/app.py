@@ -6,7 +6,7 @@ from textual.widgets import Button, Input
 from textual import work
 
 from frontend.ui.ui import MainUI
-from backend.imgdetect import detect_imagefake
+from backend.imagedetect import detect_imagefake
 
 
 class Skepti(App):
