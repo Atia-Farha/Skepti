@@ -14,4 +14,5 @@ venv/
 *.sublime-workspace
 
 backend/skepti.db
-frontend/skepti.db
+frontend/skepti.db 
+skepti.db
