@@ -1,12 +1,24 @@
 import os
+from datetime import datetime
+import sqlite3
+from pathlib import Path
 
 from textual.app import App, ComposeResult, on
 from textual.containers import Container, Grid
-from textual.widgets import Button, Input
+from textual.widgets import TabbedContent, Button, Input, Tabs, DataTable
 from textual import work
 
 from frontend.ui.ui import MainUI
-from backend.imagedetect import detect_imagefake
+from backend.imgdetect2 import detect_imagefake_torch
+
+# DB_PATH = (Path(__file__).resolve().parents[1] / "image_predictions.db")
+
+
+def _format_ts(ts: str) -> str:
+	try:
+		return datetime.fromisoformat(ts).strftime("%b %d, %Y %I:%M:%S %p")
+	except Exception:
+		return ts
 
 
 class Skepti(App):
@@ -32,8 +44,8 @@ class Skepti(App):
 	supported_extensions = [".png", ".jpg", ".jpeg", ".svg", ".tiff", ".webp"]
 
 	@work(thread=True)
-	def process_media(self, file_path: str) -> str:
-		return detect_imagefake(file_path)
+	def process_media(self, file_path: str):
+		return detect_imagefake_torch(file_path)
 
 	@on(Button.Pressed, "#submit_btn")
 	async def on_submit(self):
@@ -85,3 +97,20 @@ class Skepti(App):
 			self.query_one("#result_real").progress = 0
 			self.query_one("#result_fake").progress = 0
 			self.notify("Failed to detect.", title="Error!", severity="error", timeout=1.5)
+
+	@on(TabbedContent.TabActivated)
+	def on_tab_change(self, event: TabbedContent.TabActivated):
+		pane_id = event.pane.id or ""
+
+		if pane_id == "tab_history":
+			table = self.query_one("#history_table", DataTable)
+			table.clear(columns=True)
+			table.add_columns("File Path", "Real", "Fake", "Timestamp")
+
+			with sqlite3.connect(DB_PATH) as conn:
+				cursor = conn.cursor()
+				cursor.execute("SELECT filepath, real, fake, timestamp FROM predictions ORDER BY id DESC")
+				rows = cursor.fetchall()
+
+			for filepath, real, fake, timestamp in rows:
+				table.add_row(filepath, f"{real:.0f} %", f"{fake:.0f} %", _format_ts(timestamp))

@@ -13,6 +13,11 @@ Container {
     align: center middle;
 }
 
+Horizontal {
+    height: auto;
+    align: center middle;
+}
+
 Header, Footer {
     background: #90D5FF 85%;
 }
@@ -43,7 +48,7 @@ Underline > .underline--bar {
     color: #90D5FF;
 }
 
-#tab_scan {
+#tab_scan, #tab_history {
     padding: 1 1 1 1;
 }
 

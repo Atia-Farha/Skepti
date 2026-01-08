@@ -1,5 +1,5 @@
 from textual.containers import VerticalScroll, Container, Grid
-from textual.widgets import Header, Footer, TabbedContent, TabPane, Label, Input, RadioSet, RadioButton, Button, ProgressBar
+from textual.widgets import Header, Footer, TabbedContent, TabPane, Label, Input, Button, ProgressBar, DataTable
 from textual.app import App, ComposeResult
 
 
@@ -10,7 +10,7 @@ class MainUI(VerticalScroll):
 		yield Footer()
 
 		with TabbedContent():
-			with TabPane("Scan File", id="tab_scan"):
+			with TabPane("Scan Image", id="tab_scan"):
 				with Container():
 					yield Input(id="media_file", placeholder="Enter the absolute path of an image file (e.g., \"C:/Downloads/river.png\")...")
 
@@ -27,5 +27,5 @@ class MainUI(VerticalScroll):
 					yield Label("Fake")
 					yield ProgressBar(id="result_fake", total=100, show_percentage=True, show_eta=False)
 
-			with TabPane("Past Results", id="tab-past"):
-				yield Label("This is the History tab.")
+			with TabPane("History", id="tab_history"):
+				yield DataTable(id="history_table")

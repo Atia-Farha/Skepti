@@ -136,17 +136,21 @@ Follow these instructions to set up and run the application on your local machin
 
 ### Run the Application
 
-#### Windows
+**Windows**
 
 ```bash
 python main.py
 ```
 
-#### macOS / Linux
+**macOS / Linux**
 
 ```bash
 python3 main.py
 ```
+
+**Note:**
+When running the system for the first time, it may take some time to download the AI model.
+![1st run download](assets/first-run-download.png)
 
 ## How to Use
 
