@@ -4,7 +4,9 @@ from torchvision import transforms
 import torch.nn as nn
 import torchvision.models as models
 from torch import Tensor
+from torchvision.models import ResNet18_Weights
 
+from .database import store_prediction
 
 # Torch-native preprocessing
 preprocess = transforms.Compose([
@@ -22,11 +24,9 @@ id2label = {
     "1": "Real"
 }
 
-
-# Simple torch model
-model = models.resnet18()
-model.fc = nn.Linear(model.fc.in_features, 2)  # 2 classes: Fake / Real
-
+weights = ResNet18_Weights.DEFAULT
+model = models.resnet18(weights=weights)
+model.fc = nn.Linear(model.fc.in_features, 2)
 model.eval()
 
 def detect_imagefake_torch(filepath):
@@ -53,6 +53,7 @@ def detect_imagefake_torch(filepath):
     fake = round(prediction["Fake"] * 100, 2)
 
     print(f"Image: {filepath} | Fake: {fake} | Real: {real}")
+    store_prediction(filepath, real, fake)
 
     return [real, fake]
 
