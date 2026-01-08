@@ -28,4 +28,6 @@ class MainUI(VerticalScroll):
 					yield ProgressBar(id="result_fake", total=100, show_percentage=True, show_eta=False)
 
 			with TabPane("History", id="tab_history"):
+				yield Button("Clear History", id="clear_btn")
+
 				yield DataTable(id="history_table")

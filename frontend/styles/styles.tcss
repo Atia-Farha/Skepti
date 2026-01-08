@@ -48,8 +48,16 @@ Underline > .underline--bar {
     color: #90D5FF;
 }
 
-#tab_scan, #tab_history {
+#tab_scan {
     padding: 1 1 1 1;
+}
+
+#tab_history {
+    padding: 0 1 1 1;
+}
+
+#clear_btn {
+    align: right middle;
 }
 
 Label {

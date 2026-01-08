@@ -11,7 +11,7 @@ from textual import work
 from frontend.ui.ui import MainUI
 from backend.imagedetect2 import detect_imagefake_torch
 
-DB_PATH = (Path(__file__).resolve().parents[1] / "image_predictions.db")
+DB_PATH = (Path(__file__).resolve().parents[1] / "skepti.db")
 
 
 def _format_ts(ts: str) -> str:
@@ -98,19 +98,43 @@ class Skepti(App):
 			self.query_one("#result_fake").progress = 0
 			self.notify("Failed to detect.", title="Error!", severity="error", timeout=1.5)
 
+	def _load_history(self):
+		table = self.query_one("#history_table", DataTable)
+		table.clear(columns=True)
+		table.add_columns("File Path", "Real", "Fake", "Timestamp")
+
+		if not DB_PATH.exists():
+			self.notify(f"DB not found at {DB_PATH}", title="Error!", severity="error", timeout=2)
+			return
+
+		with sqlite3.connect(DB_PATH) as conn:
+			cursor = conn.cursor()
+			cursor.execute("SELECT filepath, real, fake, timestamp FROM predictions ORDER BY id DESC")
+			rows = cursor.fetchall()
+
+		for filepath, real, fake, timestamp in rows:
+			table.add_row(filepath, f"{real:.0f} %", f"{fake:.0f} %", _format_ts(timestamp))
+
 	@on(TabbedContent.TabActivated)
 	def on_tab_change(self, event: TabbedContent.TabActivated):
 		pane_id = event.pane.id or ""
-
 		if pane_id == "tab_history":
-			table = self.query_one("#history_table", DataTable)
-			table.clear(columns=True)
-			table.add_columns("File Path", "Real", "Fake", "Timestamp")
+			self._load_history()
 
+	@on(Button.Pressed, "#clear_btn")
+	def on_clear_history(self):
+		if not DB_PATH.exists():
+			self.notify(f"DB not found at {DB_PATH}", title="Error!", severity="error", timeout=2)
+			return
+
+		try:
 			with sqlite3.connect(DB_PATH) as conn:
 				cursor = conn.cursor()
-				cursor.execute("SELECT filepath, real, fake, timestamp FROM predictions ORDER BY id DESC")
-				rows = cursor.fetchall()
+				cursor.execute("DELETE FROM predictions")
+				conn.commit()
+		except Exception as e:
+			self.notify(f"Failed to clear history: {e}", title="Error!", severity="error", timeout=2)
+			return
 
-			for filepath, real, fake, timestamp in rows:
-				table.add_row(filepath, f"{real:.0f} %", f"{fake:.0f} %", _format_ts(timestamp))
+		self._load_history()
+		self.notify("History cleared successfully.", title="Cleared!", timeout=1.5)
