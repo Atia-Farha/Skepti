@@ -1,17 +1,21 @@
-<h1 align="center">Project Title</h1>
+<h1 align="center">Skepti</h1>
 
-<p align="center">Few lines describing your project.</p>
+<p align="center">A terminal-based local system to detect DeepFake images</p>
 
 <div align="center">
 
 [![Hackathon](https://img.shields.io/badge/hackathon-UIU_HackDay_2026-orange.svg)](https://hackday.pages.dev/hackday)
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/Atia-Farha/project-name.svg)](https://github.com/Atia-Farha/project-name/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Atia-Farha/project-name.svg)](https://github.com/Atia-Farha/project-name/pulls)
+[![GitHub Issues](https://img.shields.io/github/issues/Atia-Farha/Skepti.svg)](https://github.com/Atia-Farha/Skepti/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/Atia-Farha/Skepti.svg)](https://github.com/Atia-Farha/Skepti/pulls)
 
 </div>
 
 ---
+
+A terminal-based DeepFake image detection system designed to run locally on a user’s machine without requiring an
+internet connection. It enables users to analyze images and determine whether an image is real or AI-generated (
+DeepFake), ensuring privacy-focused predictions.
 
 ## Table of Contents
 
@@ -19,6 +23,7 @@
 - [Idea / Solution](#idea--solution)
 - [Dependencies / Limitations](#dependencies--limitations)
 - [Future Scope](#future-scope)
+- [Key Features](#key-features)
 - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Setup before 1st Run](#setup-before-1st-run)
@@ -26,7 +31,7 @@
     - [Run the Application](#run-the-application)
         - [Windows](#windows)
         - [macOS / Linux](#macos--linux)
-- [Usage](#usage)
+- [How to use](#how-to-use)
 - [Built With](#built-with)
 - [Authors](#authors)
 
@@ -67,6 +72,15 @@ completed, and understood, it becomes easier to provide a solution for solving t
 Write about what you could not develop during the course of the Hackathon; and about what your project can achieve
 in the future.
 
+## Key Features
+
+- Terminal-based interface – Interactive, user-friendly, and visually appealing TUI
+- Image file input support – Analyze local image files
+- Fully local execution – No internet connection required
+- AI-powered detection – Analyzes image patterns to detect DeepFakes
+- Visual result representation – Horizontal bar graph visualization of results
+- Cross-platform compatibility – Works on Windows, macOS, and Linux
+
 ## Getting Started
 
 Follow these instructions to set up and run the application on your local machine.
@@ -80,11 +94,11 @@ Follow these instructions to set up and run the application on your local machin
 
 1. Clone the repository
     ```bash
-    git clone https://github.com/Atia-Farha/project-name.git
+    git clone https://github.com/Atia-Farha/Skepti.git
     ```
 2. Open a terminal and navigate to the project directory
     ```bash
-    cd path/to/folder/project-name
+    cd path/to/folder/Skepti
     ```
 3. Set up a virtual environment (optional but recommended)
     ```bash
@@ -101,14 +115,14 @@ Follow these instructions to set up and run the application on your local machin
         ```
 5. Install the required dependencies
     ```bash
-    pip install textual
+    pip install textual transformers torch pillow
     ```
 
 ### Setup before Every Run
 
 1. Navigate to the project directory
     ```bash
-    cd path/to/folder/project-name
+    cd path/to/folder/Skepti
     ```
 2. Activate the virtual environment
     - On Windows
@@ -134,15 +148,19 @@ python main.py
 python3 main.py
 ```
 
-## Usage
+## How to Use
 
-- Describe how to use the application here
-- Provide examples and screenshots if necessary
+- Enter the absolute path of the image file you want to detect.
+- Press the "SCAN NOW" button to start the detection process.
+- View the generated result with the horizontal bar graph visualization.
 
 ## Built With
 
 - **Python** - Core Language
 - **Textual** - TUI Framework
+- **Transformers** - AI Model Integration
+- **Torch** - Deep Learning Library
+- **Pillow** - Image Processing Library
 
 ## Authors
 

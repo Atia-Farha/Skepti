@@ -1,7 +1,8 @@
-from frontend.app import
+from frontend.app import Skepti
 
 
 def main():
+	Skepti().run()
 
 
 if __name__ == "__main__":

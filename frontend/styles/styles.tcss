@@ -1,0 +1,170 @@
+VerticalScroll {
+    min-height: 100vh;
+    background: black;
+    align: center top;
+    scrollbar-size: 1 1;
+    scrollbar-color: #90D5FF;
+    scrollbar-color-hover: #90D5FF 85%;
+    scrollbar-color-active: #90D5FF 85%;
+}
+
+Container {
+    height: auto;
+    align: center middle;
+}
+
+Header, Footer {
+    background: #90D5FF 85%;
+}
+
+TabbedContent {
+    margin-top: 1;
+}
+
+Tabs #tabs-list > Tab {
+    color: #90D5FF 25%;
+}
+
+Tabs #tabs-list > Tab:hover {
+    color: #90D5FF;
+}
+
+Tabs #tabs-list > Tab.-active {
+    background: #90D5FF;
+    color: black;
+}
+
+Tabs #tabs-list > Tab.-active:focus {
+    color: #90D5FF;
+}
+
+Underline > .underline--bar {
+    background: #90D5FF 25%;
+    color: #90D5FF;
+}
+
+#tab_scan {
+    padding: 1 1 1 1;
+}
+
+Label {
+    color: #90D5FF;
+}
+
+Input {
+    width: 1fr;
+    background: black;
+    border: solid #90D5FF 60%;
+    border-title-color: #90D5FF;
+}
+
+Input:hover, Input.-active, Input:focus {
+    border: round #90D5FF;
+}
+
+#button_container {
+    margin: 1 0;
+    layout: horizontal;
+    align-horizontal: center;
+}
+
+Button {
+    background: black;
+    color: #90D5FF;
+    border: solid #90D5FF;
+    text-style: none;
+}
+
+Button:hover {
+    text-style: bold;
+    border: round #90D5FF;
+}
+
+Button:focus {
+    background: black;
+    text-style: bold;
+    border: round #90D5FF;
+}
+
+Button.-active {
+    background: black;
+    color: #90D5FF 50%;
+    text-style: bold;
+    border: round #90D5FF;
+}
+
+#loading_container {
+    display: none;
+}
+
+#loading_bar Bar {
+    color: #90D5FF;
+}
+
+#loading_bar Bar > .bar--bar {
+    color: #90D5FF;
+    background: #90D5FF 25%;
+}
+
+#result_container {
+    display: none;
+    padding: 1 2 0 2;
+    border: panel #90D5FF;
+    border-title-background: #90D5FF;
+    border-title-color: black;
+    border-title-style: bold;
+    border-title-align: center;
+    grid-size: 2 2;
+    grid-columns: auto 1fr;
+    grid-rows: auto auto;
+    width: 100%;
+    height: auto;
+    grid-gutter: 1;
+    align: center middle;
+}
+
+#result_real Bar, #result_fake Bar {
+    width: 45vw;
+}
+
+Bar > .bar--bar {
+    background: black;
+}
+
+#result_real Bar > .bar--bar {
+    color: #0DE718;
+}
+
+#result_fake Bar > .bar--bar {
+    color: red;
+}
+
+Toast {
+    padding: 0 1;
+    background: #0E0E0E;
+    border: heavy #0DE718;
+}
+
+Toast:hover, Toast:focus {
+    background: #0E0E0E;
+}
+
+Toast .toast--title {
+    color: #0DE718;
+}
+
+Toast.-warning {
+    border: heavy orange;
+}
+
+Toast.-warning .toast--title {
+    color: orange;
+}
+
+Toast.-error {
+    border: heavy red;
+}
+
+Toast.-error .toast--title {
+    color: red;
+}
