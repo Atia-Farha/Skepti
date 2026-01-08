@@ -36,47 +36,53 @@ DeepFake), ensuring privacy-focused predictions.
 - [Authors](#authors)
 
 ## Problem Statement
+Could a feeling hide inside a visual pattern, waiting for someone to understand it ?
 
-It is useful to design and follow a specific format when writing a problem statement. While there are several options
-for doing this, the following is a simple and straightforward template often used in Business Analysis to maintain
-focus on defining the problem.
-
-- IDEAL: This section is used to describe the desired or “to be” state of the process or product. At large, this section
-  should illustrate what the expected environment would look like once the solution is implemented.
-- REALITY: This section is used to describe the current or “as is” state of the process or product.
-- CONSEQUENCES: This section is used to describe the impacts on the business if the problem is not fixed or improved
-  upon.
-  This includes costs associated with loss of money, time, productivity, competitive advantage, and so forth.
-
-Following this format will result in a workable document that can be used to understand the problem and elicit
-requirements that will lead to a winning solution.
 
 ## Idea / Solution
 
-This section is used to describe potential solutions.
+- IDEAL
 
-Once the ideal, reality, and consequences sections have been
-completed, and understood, it becomes easier to provide a solution for solving the problem.
+In an ideal scenario, users should be able to verify the authenticity of an image quickly and intuitively, without relying on technical expertise. Visual media should remain a trustworthy source of information, where the likelihood of an image being real or AI-generated can be clearly communicated through an accessible and interpretable system. A reliable deepfake detection mechanism would reduce confusion, restore trust in digital content, and help users make informed decisions in an AI-driven world.
 
-## Dependencies / Limitations
+- REALITY
 
-- What are the dependencies of your project?
-- Describe each limitation in detailed but concise terms
-- Explain why each limitation exists
-- Provide the reasons why each limitation could not be overcome using the method(s) chosen to acquire.
-- Assess the impact of each limitation in relation to the overall findings and conclusions of your project, and if
-  appropriate, describe how these limitations could point to the need for further research.
+With the rapid advancement of generative AI, deepfake images have become increasingly common and visually convincing. Distinguishing between real and AI-generated images is difficult for the average user, leading to uncertainty and mistrust. Existing solutions are either opaque, inconsistent, or inaccessible. While pretrained ML models can provide stable predictions, more flexible approaches such as custom-trained models require significant data and tuning, which are often out of scope in early-stage implementations.
+
+- CONSEQUENCES
+
+If this problem remains unaddressed, misinformation, manipulation, and erosion of trust in visual content will continue to grow. Individuals and organizations may make incorrect decisions based on falsified images, leading to social, reputational, and economic harm. The inability to reliably assess image authenticity ultimately weakens confidence in digital communication and amplifies the risks associated with rapid AI-generated content adoption.
+
+## Dependencies
+
+* **Pretrained Models (TorchVision):** The system depends on publicly available pretrained models to enable fast and reliable inference without custom training.
+* **PyTorch Ecosystem:** Core functionality relies on PyTorch, TorchVision, and PIL for model execution and image preprocessing.
+* **Compute Resources:** Performance is constrained by available CPU/GPU resources, influencing model size and inference speed.
+
+## Limitations
+
+* **No Custom Training:** The model uses pretrained weights due to time, data, and compute constraints, which may reduce accuracy on novel or unseen deepfake styles.
+* **Face-Centric Bias:** Most deepfake datasets focus on facial manipulation, limiting reliability for non-face or abstract images.
+* **Experimental Torch Backend:** The Torch-based implementation is non-deterministic and uncalibrated, as it is intended only as a future research scaffold.
+* **Image-Only Support:** Video deepfake detection is not yet implemented due to added computational and temporal modeling complexity.
+* **Confidence Calibration:** Output probabilities are not fully calibrated and should be interpreted as indicative rather than definitive.
+
+### Impact and Future Work
+
+These limitations define the current scope rather than the viability of the system. Addressing them points toward future work in custom training, calibration, and video-based deepfake detection.
 
 ## Future Scope
 
-Write about what you could not develop during the course of the Hackathon; and about what your project can achieve
-in the future.
+While Skepti successfully demonstrates image-based deepfake detection within the hackathon timeline, several planned capabilities could not be fully developed due to time, data, and computational constraints. Custom training and fine-tuning of models on domain-specific deepfake datasets were outside the scope of this iteration, limiting adaptability to newly emerging deepfake techniques. Video-based deepfake detection, which requires temporal and spatiotemporal modeling, was also deferred due to its added complexity and higher resource requirements.
+
+In the future, Skepti can evolve into a more robust and adaptive system by incorporating custom-trained models, improved confidence calibration, and ensemble-based detection strategies. Extending support to video and multimodal inputs (image, audio, and metadata) would significantly enhance real-world applicability. Additionally, integrating explainability mechanisms and continuous model updates can help maintain reliability as generative AI techniques continue to advance.
+
 
 ## Key Features
 
 - Terminal-based interface – Interactive, user-friendly, and visually appealing TUI
 - Image file input support – Analyze local image files
-- Fully local execution – No internet connection required
+- Fully local execution – No internet connection required once the system built (after the first setup)
 - AI-powered detection – Analyzes image patterns to detect DeepFakes
 - Visual result representation – Horizontal bar graph visualization of results
 - Cross-platform compatibility – Works on Windows, macOS, and Linux
@@ -115,7 +121,7 @@ Follow these instructions to set up and run the application on your local machin
         ```
 5. Install the required dependencies
     ```bash
-    pip install textual transformers torch pillow
+    pip install textual torch pillow torchvision
     ```
 
 ### Setup before Every Run
@@ -148,23 +154,28 @@ python main.py
 python3 main.py
 ```
 
-**Note:**
-When running the system for the first time, it may take some time to download the AI model.
-![1st run download](assets/first-run-download.png)
+
 
 ## How to Use
 
 - Enter the absolute path of the image file you want to detect.
 - Press the "SCAN NOW" button to start the detection process.
 - View the generated result with the horizontal bar graph visualization.
+- Go to "History" tab to view past results 
+
+## Preview
+
+![Scan Feature](assets/scanfeature.png)
+![History feature](assets/historyfeature.png)
 
 ## Built With
 
 - **Python** - Core Language
 - **Textual** - TUI Framework
-- **Transformers** - AI Model Integration
-- **Torch** - Deep Learning Library
+- **Torch** - Machine learning framework
 - **Pillow** - Image Processing Library
+- **Torchvision** - Machine learning framework extension
+- **Sqlite** - Database
 
 ## Authors
 
