@@ -35,3 +35,5 @@ def detect_imagefake(filepath):
     store_prediction(filepath, real, fake)
 
     return [real, fake]
+
+# detect_imagefake('/home/pancake/Downloads/gemini_dhaka_night.png')
