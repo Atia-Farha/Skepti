@@ -2,6 +2,7 @@ from transformers import AutoImageProcessor, SiglipForImageClassification
 from PIL import Image
 import torch
 
+from .database import store_prediction
 
 # Load model and processor
 model_name = "prithivMLmods/open-deepfake-detection"  # Updated model name
@@ -14,8 +15,8 @@ id2label = {
     "1": "Real"
 }
 
-def detect_imagefake(image):
-    image = Image.open(image).convert("RGB")
+def detect_imagefake(filepath):
+    image = Image.open(filepath).convert("RGB")
     inputs = processor(images=image, return_tensors="pt")
 
     with torch.no_grad():
@@ -30,5 +31,7 @@ def detect_imagefake(image):
     real = round(prediction["Real"] * 100, 2)
     fake = round(prediction["Fake"] * 100, 2)
 
-    return [real, fake]
+    print(f"Image: {filepath} | Fake: {fake} | Real: {real}")
+    store_prediction(filepath, real, fake)
 
+    return [real, fake]
